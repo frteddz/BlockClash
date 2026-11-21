@@ -128,8 +128,8 @@ export class LanMatchScene extends Phaser.Scene {
       this.refresh();
       return;
     }
-    if (message.t === 'countdown' && this.role === 'guest' && this.match === undefined) {
-      this.match = createMatch(message.seed);
+    if (message.t === 'countdown' && this.role === 'guest') {
+      if (this.match === undefined) this.match = createMatch(message.seed);
       this.refresh();
       this.runCountdown();
       return;

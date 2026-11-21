@@ -15,6 +15,7 @@
     "build": "pnpm assets && pnpm --filter @blockclash/shared build && pnpm --filter @blockclash/client build",
     "build:web": "pnpm build",
     "build:apk": "node scripts/build-apk.mjs",
+    "lan:pc": "pnpm --filter @blockclash/shared build && node apps/server/lan-host.mjs",
     "build:android": "pnpm build:apk",
     "test": "pnpm --filter @blockclash/shared test",
     "test:watch": "pnpm --filter @blockclash/shared test:watch",

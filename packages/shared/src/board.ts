@@ -1,4 +1,4 @@
-import { CONFIG } from './config';
+import { CONFIG } from './config.js';
 import {
   GARBAGE_PIECE_ID,
   type Board,
@@ -7,7 +7,7 @@ import {
   type Piece,
   type Placement,
   type PieceColor,
-} from './types';
+} from './types.js';
 
 const W = CONFIG.board.width;
 const H = CONFIG.board.height;

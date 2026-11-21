@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import type { PluginListenerHandle } from '@capacitor/core';
-import { generateCode, isNative, lan, type LanDevice } from '../lan/lan-api';
+import { canUseLan, generateCode, isNative, lan, type LanDevice } from '../lan/lan-api';
 import { HostTransport, GuestTransport } from '../lan/lan-session';
 import { makeButton, makePanel } from '../ui/button';
 import { COLOR, CSS, FONT, uiPx } from '../theme';
@@ -29,24 +29,33 @@ export class LanLobbyScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    if (!isNative()) {
+    if (!canUseLan()) {
       this.add
-        .text(width / 2, height * 0.44, 'LAN duel needs the Android app.\nInstall BlockClash on two phones on the same WiFi.', {
-          fontFamily: FONT.ui,
-          fontSize: `${uiPx(18)}px`,
-          color: CSS.soft,
-          align: 'center',
-        })
+        .text(
+          width / 2,
+          height * 0.44,
+          'LAN duel cannot run from a secure website.\nUse the Android app, or run the PC LAN host and open its HTTP address.',
+          {
+            fontFamily: FONT.ui,
+            fontSize: `${uiPx(18)}px`,
+            color: CSS.soft,
+            align: 'center',
+          },
+        )
         .setOrigin(0.5);
     } else {
       const buttonWidth = Math.min(uiPx(300), width * 0.75);
-      makeButton(this, width / 2, height * 0.35, 'HOST GAME', () => this.host(), {
-        width: buttonWidth,
-        height: uiPx(60),
-        fontSize: uiPx(24),
-        fill: COLOR.green,
-      });
-      makeButton(this, width / 2, height * 0.46, 'FIND A GAME', () => this.join(), {
+      let y = height * 0.35;
+      if (isNative()) {
+        makeButton(this, width / 2, y, 'HOST GAME', () => this.host(), {
+          width: buttonWidth,
+          height: uiPx(60),
+          fontSize: uiPx(24),
+          fill: COLOR.green,
+        });
+        y += uiPx(80);
+      }
+      makeButton(this, width / 2, y, 'FIND A GAME', () => this.join(), {
         width: buttonWidth,
         height: uiPx(60),
         fontSize: uiPx(24),
@@ -111,6 +120,22 @@ export class LanLobbyScene extends Phaser.Scene {
   }
 
   private async join(): Promise<void> {
+    if (!isNative()) {
+      const answer = window.prompt('Host address (IP:port)', `${window.location.hostname}:5175`);
+      if (answer === null || answer.trim() === '') return;
+      const [host, portText] = answer.trim().split(':');
+      const port = Number(portText ?? '5175');
+      if (host === undefined || !Number.isInteger(port)) {
+        this.setStatus('That address is not valid.');
+        return;
+      }
+      this.scene.start('LanMatch', {
+        role: 'guest',
+        code: '----',
+        transport: new GuestTransport(host, port),
+      });
+      return;
+    }
     this.listeners.push(
       await lan.onDevices((event) => this.showDevices(event.devices)),
     );

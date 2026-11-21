@@ -5,12 +5,12 @@ import {
   getFullLines,
   hasAnyLegalMove,
   placePiece,
-} from './board';
-import { clearLines } from './board';
-import { garbageForClear, addGarbage } from './garbage';
-import { generatePieceSet } from './pieces';
-import { scorePlacement, type PlacementScore } from './scoring';
-import { type ClearedCell, type Move, type Piece, type PlayerIndex, type Point } from './types';
+} from './board.js';
+import { clearLines } from './board.js';
+import { garbageForClear, addGarbage } from './garbage.js';
+import { generatePieceSet } from './pieces.js';
+import { scorePlacement, type PlacementScore } from './scoring.js';
+import { type ClearedCell, type Move, type Piece, type PlayerIndex, type Point } from './types.js';
 
 export interface PlayerState {
   board: ReturnType<typeof createBoard>;

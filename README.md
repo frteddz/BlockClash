@@ -44,13 +44,16 @@ The original file is never edited.
 
 ### LAN duel (Android only)
 
-Install the APK on two phones connected to the same WiFi. On the first phone choose
-OFFLINE DUEL, then HOST GAME. It shows a 6-digit code. On the second phone choose
-OFFLINE DUEL, then FIND A GAME. Nearby hosts appear with their code, so tap the right
-one. The host phone runs the game rules and keeps both boards in sync.
+Phone versus phone: install the APK on both phones. On one choose OFFLINE DUEL > HOST
+GAME. It shows a 6-digit code. On the other choose OFFLINE DUEL > FIND A GAME, then tap
+the host. The host phone runs the game rules and keeps both boards in sync.
 
-A normal browser tab cannot open a LAN socket, so the web build explains that LAN duel
-needs the Android app.
+PC versus phone, or PC versus PC: on the PC run `pnpm lan:pc`, then open
+`http://<pc-ip>:5175` in a browser and choose OFFLINE DUEL > FIND A GAME. The phone
+finds the same host through WiFi discovery and joins. The PC host is authoritative.
+
+A browser can only join over plain HTTP. GitHub Pages is HTTPS, so the hosted web
+version cannot open a LAN socket and explains this on the LAN screen.
 
 ### Hosting
 

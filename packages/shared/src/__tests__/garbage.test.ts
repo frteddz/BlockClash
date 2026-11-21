@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { createBoard, getLegalMoves } from '../board';
-import { CONFIG } from '../config';
-import { addGarbage, garbageForClear } from '../garbage';
-import type { Piece, PieceColor, PieceShape } from '../types';
+import { createBoard, getLegalMoves } from '../board.js';
+import { CONFIG } from '../config.js';
+import { addGarbage, garbageForClear } from '../garbage.js';
+import type { Piece, PieceColor, PieceShape } from '../types.js';
 
 function singlePiece(id: number, color: PieceColor = 'blue'): Piece {
   const shape: PieceShape = { id: 'single', weight: 1, cells: [[0, 0]], width: 1, height: 1 };

@@ -71,6 +71,7 @@ Fill these in as soon as they exist, and keep them correct:
 - build web: `pnpm build` (copies assets, typechecks, outputs `apps/client/dist/`)
 - build android APK: `pnpm build:apk` (needs Android SDK + JDK 17/21; outputs `BlockClash-v1.apk` in the repo root)
 - lint / format: `pnpm lint`, `pnpm lint:fix`, `pnpm format`, `pnpm format:check`
+- PC LAN host: `pnpm lan:pc` (serves the web game at `http://<pc-ip>:5175` so a PC can duel a phone on the same WiFi)
 - typecheck all packages: `pnpm typecheck`
 - rebuild copied assets only: `pnpm assets`
 

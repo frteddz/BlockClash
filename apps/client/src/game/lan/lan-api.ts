@@ -32,6 +32,14 @@ export function isNative(): boolean {
   return Capacitor.isNativePlatform();
 }
 
+/**
+ * A browser can only open a LAN WebSocket when the page itself is served over
+ * plain HTTP. GitHub Pages is HTTPS, so browsers there cannot join a LAN game.
+ */
+export function canUseLan(): boolean {
+  return isNative() || window.location.protocol === 'http:';
+}
+
 export function generateCode(): string {
   const values = new Uint32Array(1);
   crypto.getRandomValues(values);

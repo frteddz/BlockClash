@@ -1,7 +1,7 @@
-import { cloneBoard, hasAnyLegalMove } from './board';
-import { CONFIG } from './config';
-import { createRng, hashSeed } from './rng';
-import { GARBAGE_PIECE_ID, type Board, type Piece, type Point } from './types';
+import { cloneBoard, hasAnyLegalMove } from './board.js';
+import { CONFIG } from './config.js';
+import { createRng, hashSeed } from './rng.js';
+import { GARBAGE_PIECE_ID, type Board, type Piece, type Point } from './types.js';
 
 /** How many gray cells an attack drops, from lines cleared and current streak. */
 export function garbageForClear(linesCleared: number, streak: number): number {

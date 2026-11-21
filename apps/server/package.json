@@ -9,6 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@blockclash/shared": "workspace:*"
+    "@blockclash/shared": "workspace:*",
+    "bonjour-service": "^1.3.0",
+    "ws": "^8.18.0"
   }
 }

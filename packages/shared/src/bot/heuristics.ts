@@ -1,8 +1,8 @@
-import { clearLines, columnHeights, countFilled, getFullLines, placePiece } from '../board';
-import { CONFIG } from '../config';
-import { garbageForClear } from '../garbage';
-import { scorePlacement } from '../scoring';
-import type { Board, Piece, Placement } from '../types';
+import { clearLines, columnHeights, countFilled, getFullLines, placePiece } from '../board.js';
+import { CONFIG } from '../config.js';
+import { garbageForClear } from '../garbage.js';
+import { scorePlacement } from '../scoring.js';
+import type { Board, Piece, Placement } from '../types.js';
 
 export interface BoardMetrics {
   holes: number;

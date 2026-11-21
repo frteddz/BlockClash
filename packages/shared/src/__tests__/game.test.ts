@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { getLegalMoves } from '../board';
-import { CONFIG } from '../config';
-import { applyMove, createMatch, startMatch } from '../game';
-import { generatePieceSet } from '../pieces';
-import type { Piece, PieceShape } from '../types';
+import { getLegalMoves } from '../board.js';
+import { CONFIG } from '../config.js';
+import { applyMove, createMatch, startMatch } from '../game.js';
+import { generatePieceSet } from '../pieces.js';
+import type { Piece, PieceShape } from '../types.js';
 
 function vertical2(id: number): Piece {
   const shape: PieceShape = {

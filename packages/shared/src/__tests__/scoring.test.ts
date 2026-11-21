@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { CONFIG } from '../config';
-import { scorePlacement } from '../scoring';
+import { CONFIG } from '../config.js';
+import { scorePlacement } from '../scoring.js';
 
 describe('scoring', () => {
   it('pays for placed cells even with no clear', () => {

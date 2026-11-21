@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { createBoard, getLegalMoves } from '../board';
-import { botDelayMs, chooseMove } from '../bot';
-import { CONFIG } from '../config';
-import { createRng } from '../rng';
-import { generatePieceSet } from '../pieces';
-import type { Difficulty } from '../types';
+import { createBoard, getLegalMoves } from '../board.js';
+import { botDelayMs, chooseMove } from '../bot/index.js';
+import { CONFIG } from '../config.js';
+import { createRng } from '../rng.js';
+import { generatePieceSet } from '../pieces.js';
+import type { Difficulty } from '../types.js';
 
 describe('bot', () => {
   it('always chooses a legal move for every difficulty', () => {

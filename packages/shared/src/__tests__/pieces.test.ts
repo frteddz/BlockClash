@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { CONFIG } from '../config';
-import { generatePieceSet, SHAPES } from '../pieces';
-import { PIECE_COLORS } from '../types';
+import { CONFIG } from '../config.js';
+import { generatePieceSet, SHAPES } from '../pieces.js';
+import { PIECE_COLORS } from '../types.js';
 
 describe('pieces', () => {
   it('generates the same set for the same seed and index', () => {

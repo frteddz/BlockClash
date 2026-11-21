@@ -1,6 +1,6 @@
-import { CONFIG } from './config';
-import { createRng, hashSeed } from './rng';
-import { PIECE_COLORS, type Piece, type PieceShape, type ShapeCells } from './types';
+import { CONFIG } from './config.js';
+import { createRng, hashSeed } from './rng.js';
+import { PIECE_COLORS, type Piece, type PieceShape, type ShapeCells } from './types.js';
 
 function shape(id: string, weight: number, rows: string[]): PieceShape {
   const cells: Array<readonly [number, number]> = [];

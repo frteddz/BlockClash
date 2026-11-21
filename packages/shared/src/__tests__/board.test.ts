@@ -9,9 +9,9 @@ import {
   getLegalMoves,
   hasAnyLegalMove,
   placePiece,
-} from '../board';
-import { CONFIG } from '../config';
-import type { Board, Cell, Piece, PieceColor, PieceShape } from '../types';
+} from '../board.js';
+import { CONFIG } from '../config.js';
+import type { Board, Cell, Piece, PieceColor, PieceShape } from '../types.js';
 
 function shape(cells: Array<readonly [number, number]>): PieceShape {
   const width = Math.max(...cells.map(([x]) => x)) + 1;

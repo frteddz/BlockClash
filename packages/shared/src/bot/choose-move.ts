@@ -1,8 +1,8 @@
-import { cloneBoard, getLegalMoves } from '../board';
-import { CONFIG } from '../config';
-import type { Rng } from '../rng';
-import type { Board, Difficulty, Piece, Placement } from '../types';
-import { evaluatePlacement, isCrowded, type PlacementEvaluation } from './heuristics';
+import { cloneBoard, getLegalMoves } from '../board.js';
+import { CONFIG } from '../config.js';
+import type { Rng } from '../rng.js';
+import type { Board, Difficulty, Piece, Placement } from '../types.js';
+import { evaluatePlacement, isCrowded, type PlacementEvaluation } from './heuristics.js';
 
 type Scored = { move: Placement; evaluation: PlacementEvaluation };
 

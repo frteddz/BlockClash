@@ -15,7 +15,8 @@ export const COLOR = {
   green: 0x6fbf8c,
   red: 0xe46a72,
   gold: 0xffc857,
-  boardSlot: 0xe9dcc6,
+  boardSlot: 0xd2be9f,
+  gridLine: 0x9d876c,
 } as const;
 
 export const CSS = {

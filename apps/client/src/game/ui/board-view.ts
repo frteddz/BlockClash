@@ -39,7 +39,7 @@ export class BoardView {
     frame.fillRoundedRect(x - 8, y - 8, columns * cellSize + 16, rows * cellSize + 16, 12);
     frame.fillStyle(COLOR.boardSlot, 1);
     frame.fillRoundedRect(x - 5, y - 5, columns * cellSize + 10, rows * cellSize + 10, 10);
-    frame.lineStyle(1, COLOR.shadow, 0.9);
+    frame.lineStyle(1.5, COLOR.gridLine, 0.95);
     for (let col = 0; col <= columns; col += 1) {
       frame.lineBetween(x + col * cellSize, y, x + col * cellSize, y + rows * cellSize);
     }

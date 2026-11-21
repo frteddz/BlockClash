@@ -65,7 +65,7 @@ BlockClash/
 Fill these in as soon as they exist, and keep them correct:
 
 - install: `pnpm install`
-- client dev: `pnpm dev` (copies assets first, then Vite at http://localhost:5173)
+- client dev: `pnpm dev` (copies assets first, then Vite at http://localhost:5173; if that port is taken, Vite prints the next one, e.g. 5174)
 - server dev: `pnpm dev:server` (Phase 3 - prints a "not built yet" message for now)
 - test: `pnpm test` (shared-core unit tests); `pnpm test:watch` while developing
 - build web: `pnpm build` (copies assets, typechecks, outputs `apps/client/dist/`)

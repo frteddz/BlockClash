@@ -42,6 +42,16 @@ pnpm build:apk
 Launcher icons come from `assets/logo/icon_1024-mobile.png` through `scripts/make-android-icons.mjs`.
 The original file is never edited.
 
+### LAN duel (Android only)
+
+Install the APK on two phones connected to the same WiFi. On the first phone choose
+OFFLINE DUEL, then HOST GAME. It shows a 6-digit code. On the second phone choose
+OFFLINE DUEL, then FIND A GAME. Nearby hosts appear with their code, so tap the right
+one. The host phone runs the game rules and keeps both boards in sync.
+
+A normal browser tab cannot open a LAN socket, so the web build explains that LAN duel
+needs the Android app.
+
 ### Hosting
 
 Pushes to `master` run `.github/workflows/deploy.yml`, which builds the web game and publishes it

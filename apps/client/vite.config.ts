@@ -10,6 +10,14 @@ export default defineConfig({
   build: {
     target: 'es2020',
     outDir: 'dist',
-    chunkSizeWarningLimit: 1500,
+    chunkSizeWarningLimit: 1800,
+    rollupOptions: {
+      output: {
+        // Phaser barely changes between releases, so keep it in its own cached chunk.
+        manualChunks: {
+          phaser: ['phaser'],
+        },
+      },
+    },
   },
 });

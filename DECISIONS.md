@@ -11,3 +11,5 @@ One short entry per real decision. Keep this up to date with `AGENTS.md`.
 - **D007 (Phase 2):** The three jingle SFX left as TBD in `AGENTS.md` use temporary picks in `sfx-map.ts`: victory is 8-bit NES08, perfect_clear is Pizzicato16, new_highscore is Steel16. Swappable in one file.
 - **D008 (Phase 2):** Layout uses Phaser RESIZE mode and is computed at runtime, so phones get portrait with the opponent mini-board on top, and PC/TV get landscape with two boards side by side.
 - **D009 (Phase 0):** TypeScript `strict: true` is the enforced level. Extra pedantic flags are off to keep the code readable.
+- **D010 (Phase 2):** A `window.__blockclash` game reference is exposed only in dev builds for browser debugging. Production builds strip it via `import.meta.env.DEV`.
+- **D011 (Phase 2):** Verified in a real browser at 976x727 landscape and 390x844 portrait. The tray is sized before the boards in the layout math so it never covers the bottom row.

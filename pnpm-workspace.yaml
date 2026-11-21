@@ -1,6 +1,6 @@
 packages:
-  - "packages/*"
-  - "apps/*"
+  - 'packages/*'
+  - 'apps/*'
 
 # pnpm 12 requires native build scripts to be explicitly allowed.
 allowBuilds:

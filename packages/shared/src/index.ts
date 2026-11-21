@@ -1,2 +1,9 @@
-/** Pure, deterministic game core. Phase 1 fills this package. */
-export {};
+export * from './config';
+export * from './types';
+export * from './rng';
+export * from './pieces';
+export * from './board';
+export * from './scoring';
+export * from './garbage';
+export * from './game';
+export * from './bot';

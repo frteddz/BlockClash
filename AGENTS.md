@@ -7,6 +7,7 @@ Read this whole file before doing anything. It is the source of truth for the pr
 **BlockClash** (one word, capital B and C) is a cartoony, chill, head-to-head block puzzle game. The core feel is a Block Blast-style puzzle (drag pieces onto a grid, clear lines). **There is NO single-player mode. Every match is versus.**
 
 One codebase ships as:
+
 - a browser version (PC, TV browser, phone browser)
 - an Android APK (wrapped with Capacitor)
 
@@ -62,6 +63,7 @@ BlockClash/
 ### Commands
 
 Fill these in as soon as they exist, and keep them correct:
+
 - install: `pnpm install`
 - client dev: `pnpm dev` (copies assets first, then Vite at http://localhost:5173)
 - server dev: `pnpm dev:server` (Phase 3 - prints a "not built yet" message for now)
@@ -92,6 +94,7 @@ Fill these in as soon as they exist, and keep them correct:
 ## 6. Bots
 
 Live in `packages/shared/src/bot/` as pure functions, for example `chooseMove(state, difficulty, rng)`. They run on-device, offline.
+
 - Easy: random legal move, slightly prefers line clears.
 - Medium: greedy heuristic (lines cleared, fewer holes, less fragmentation, attack potential).
 - Hard: tries all orderings of the 3-piece tray with the same heuristic, plus a defensive bias when the board is crowded.
@@ -128,24 +131,24 @@ assets/
   Other textures: `cell_empty`, `block_garbage`, `block_flash`, `fx_sparkle`, `fx_dot` (white, tint in code). Placement ghost = normal block textures at about 40% alpha. Pack the block textures into one atlas for performance.
 - **SFX:** all in one config file `apps/client/src/audio/sfx-map.ts` mapping event name to file, so the user can swap sounds without touching game code. First picks, the user may change them:
 
-  | Event | File |
-  |---|---|
-  | ui_click | kenney-interface/click_001 |
-  | ui_back | kenney-interface/back_001 |
-  | piece_pickup | kenney-interface/select_001 |
-  | piece_place | kenney-impact/impactSoft_medium_000 |
-  | piece_invalid | kenney-interface/error_001 |
-  | line_clear | kenney-digital/pepSound1 |
-  | big_clear (3+ lines) | kenney-digital/powerUp5 |
-  | combo (pitch up per level in code) | kenney-digital/phaserUp1 |
-  | attack_send | kenney-digital/laser1 |
-  | attack_receive | kenney-impact/impactPunch_heavy_000 |
-  | garbage_land | kenney-impact/impactPlate_heavy_000 |
-  | countdown_tick | kenney-interface/tick_001 |
-  | countdown_go | kenney-interface/confirmation_003 |
-  | match_found | kenney-interface/confirmation_001 |
-  | time_warning | kenney-interface/tick_002 |
-  | defeat, game_over | kenney-digital/lowDown |
+  | Event                                 | File                                    |
+  | ------------------------------------- | --------------------------------------- |
+  | ui_click                              | kenney-interface/click_001              |
+  | ui_back                               | kenney-interface/back_001               |
+  | piece_pickup                          | kenney-interface/select_001             |
+  | piece_place                           | kenney-impact/impactSoft_medium_000     |
+  | piece_invalid                         | kenney-interface/error_001              |
+  | line_clear                            | kenney-digital/pepSound1                |
+  | big_clear (3+ lines)                  | kenney-digital/powerUp5                 |
+  | combo (pitch up per level in code)    | kenney-digital/phaserUp1                |
+  | attack_send                           | kenney-digital/laser1                   |
+  | attack_receive                        | kenney-impact/impactPunch_heavy_000     |
+  | garbage_land                          | kenney-impact/impactPlate_heavy_000     |
+  | countdown_tick                        | kenney-interface/tick_001               |
+  | countdown_go                          | kenney-interface/confirmation_003       |
+  | match_found                           | kenney-interface/confirmation_001       |
+  | time_warning                          | kenney-interface/tick_002               |
+  | defeat, game_over                     | kenney-digital/lowDown                  |
   | victory, perfect_clear, new_highscore | TBD, user will pick from kenney-jingles |
 
 - **Music:** background track not chosen yet. Build a music player with a placeholder slot and mute/volume settings.

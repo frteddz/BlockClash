@@ -1,0 +1,14 @@
+{
+  "name": "@blockclash/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Phase 3 - the game server is not built yet'",
+    "build": "echo 'Phase 3 - the game server is not built yet'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@blockclash/shared": "workspace:*"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "blockclash",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "assets": "node scripts/copy-assets.mjs",
+    "dev": "pnpm assets && pnpm --filter @blockclash/client dev",
+    "dev:client": "pnpm dev",
+    "dev:server": "pnpm --filter @blockclash/server dev",
+    "build": "pnpm assets && pnpm --filter @blockclash/shared build && pnpm --filter @blockclash/client build",
+    "build:web": "pnpm build",
+    "build:android": "echo 'Phase 6 - Capacitor Android build is not implemented yet'",
+    "test": "pnpm --filter @blockclash/shared test",
+    "test:watch": "pnpm --filter @blockclash/shared test:watch",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.2",
+    "sharp": "^0.33.5",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.1",
+    "vitest": "^2.1.8"
+  }
+}

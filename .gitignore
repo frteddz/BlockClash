@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vite/
+*.local
+.env
+.env.*.local
+apps/client/public/assets/
+apps/client/android/
+.DS_Store
+coverage/

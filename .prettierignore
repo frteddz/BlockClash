@@ -1,0 +1,9 @@
+node_modules
+dist
+apps/client/public
+assets
+pnpm-lock.yaml
+*.mp3
+*.ogg
+*.png
+*.ttf

@@ -69,7 +69,7 @@ Fill these in as soon as they exist, and keep them correct:
 - server dev: `pnpm dev:server` (Phase 3 - prints a "not built yet" message for now)
 - test: `pnpm test` (shared-core unit tests); `pnpm test:watch` while developing
 - build web: `pnpm build` (copies assets, typechecks, outputs `apps/client/dist/`)
-- build android: `pnpm build:android` (Phase 6 - not implemented yet)
+- build android APK: `pnpm build:apk` (needs Android SDK + JDK 17/21; outputs `BlockClash-v1.apk` in the repo root)
 - lint / format: `pnpm lint`, `pnpm lint:fix`, `pnpm format`, `pnpm format:check`
 - typecheck all packages: `pnpm typecheck`
 - rebuild copied assets only: `pnpm assets`

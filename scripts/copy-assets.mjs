@@ -80,6 +80,9 @@ async function main() {
   // ---- Main music (the one supplied by the user, an .mp3) ----------------
   await copy('music/velariomusic-upbeat-chill-613805.mp3', 'music/main-theme.mp3');
 
+  // ---- App icon ----------------------------------------------------------
+  await copy('logo/icon_1024-mobile.png', 'icon.png');
+
   // ---- UI ----------------------------------------------------------------
   await copy('ui/kenney-game-icons/PNG/White/1x/audioOn.png', 'ui/audioOn.png');
   await copy('ui/kenney-game-icons/PNG/White/1x/audioOff.png', 'ui/audioOff.png');

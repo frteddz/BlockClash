@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { audio } from '../audio/audio-manager';
 import { makeButton, makePanel } from '../ui/button';
-import { COLOR, CSS, FONT } from '../theme';
+import { COLOR, CSS, FONT, uiPx } from '../theme';
 
 export class SettingsScene extends Phaser.Scene {
   private musicLabel?: Phaser.GameObjects.Text;
@@ -20,26 +20,26 @@ export class SettingsScene extends Phaser.Scene {
       this,
       width / 2,
       height / 2,
-      Math.min(520, width * 0.92),
-      Math.min(520, height * 0.86),
+      Math.min(uiPx(520), width * 0.92),
+      Math.min(uiPx(520), height * 0.86),
     );
 
     this.add
       .text(width / 2, height * 0.19, 'SETTINGS', {
         fontFamily: FONT.display,
-        fontSize: `${Math.max(30, Math.min(50, width * 0.08))}px`,
+        fontSize: `${Math.max(uiPx(30), Math.min(uiPx(50), width * 0.08))}px`,
         color: CSS.ink,
       })
       .setOrigin(0.5);
 
-    const small = { width: 150, height: 50, fontSize: 18 };
+    const small = { width: uiPx(150), height: uiPx(50), fontSize: uiPx(18) };
     let y = height * 0.32;
-    const gap = Math.min(76, height * 0.12);
+    const gap = Math.min(uiPx(76), height * 0.12);
 
     this.musicLabel = this.add
       .text(width / 2, y, `MUSIC: ${audio.isMusicOn() ? 'ON' : 'OFF'}`, {
         fontFamily: FONT.ui,
-        fontSize: '22px',
+        fontSize: `${uiPx(22)}px`,
         color: CSS.ink,
       })
       .setOrigin(0.5);
@@ -60,7 +60,7 @@ export class SettingsScene extends Phaser.Scene {
     this.musicVolumeLabel = this.add
       .text(width / 2, y, `MUSIC VOLUME: ${Math.round(audio.getSettings().musicVolume * 100)}%`, {
         fontFamily: FONT.ui,
-        fontSize: '20px',
+        fontSize: `${uiPx(20)}px`,
         color: CSS.ink,
       })
       .setOrigin(0.5);
@@ -76,7 +76,7 @@ export class SettingsScene extends Phaser.Scene {
     this.sfxLabel = this.add
       .text(width / 2, y, `SFX VOLUME: ${Math.round(audio.getSettings().sfxVolume * 100)}%`, {
         fontFamily: FONT.ui,
-        fontSize: '20px',
+        fontSize: `${uiPx(20)}px`,
         color: CSS.ink,
       })
       .setOrigin(0.5);
@@ -91,7 +91,7 @@ export class SettingsScene extends Phaser.Scene {
     this.motionLabel = this.add
       .text(width / 2, y, `REDUCE MOTION: ${audio.getSettings().reduceMotion ? 'ON' : 'OFF'}`, {
         fontFamily: FONT.ui,
-        fontSize: '20px',
+        fontSize: `${uiPx(20)}px`,
         color: CSS.ink,
       })
       .setOrigin(0.5);
@@ -110,9 +110,9 @@ export class SettingsScene extends Phaser.Scene {
     );
 
     makeButton(this, 62, 42, 'BACK', () => this.scene.start('Menu'), {
-      width: 96,
-      height: 48,
-      fontSize: 17,
+      width: uiPx(96),
+      height: uiPx(48),
+      fontSize: uiPx(17),
       fill: COLOR.ink,
       sound: 'ui_back',
     });
@@ -120,15 +120,15 @@ export class SettingsScene extends Phaser.Scene {
 
   private volumeRow(y: number, change: (delta: number) => void): void {
     makeButton(this, this.scale.width / 2 - 95, y, '-', () => change(-0.1), {
-      width: 60,
-      height: 46,
-      fontSize: 24,
+      width: uiPx(60),
+      height: uiPx(46),
+      fontSize: uiPx(24),
       fill: COLOR.ink,
     });
     makeButton(this, this.scale.width / 2 + 95, y, '+', () => change(0.1), {
-      width: 60,
-      height: 46,
-      fontSize: 24,
+      width: uiPx(60),
+      height: uiPx(46),
+      fontSize: uiPx(24),
       fill: COLOR.ink,
     });
   }

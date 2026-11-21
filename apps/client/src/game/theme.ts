@@ -27,3 +27,13 @@ export const CSS = {
 
 /** Small radius everywhere. No candy pills. */
 export const RADIUS = 12;
+
+/** Hard-coded pixel caps need to grow with the game buffer on high-DPI screens. */
+export const UI_DPR = Math.min(
+  typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1,
+  2,
+);
+
+export function uiPx(value: number): number {
+  return value * UI_DPR;
+}

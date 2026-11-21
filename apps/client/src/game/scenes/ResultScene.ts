@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import type { Difficulty } from '@blockclash/shared';
 import { makeButton, makePanel } from '../ui/button';
-import { COLOR, CSS, FONT } from '../theme';
+import { COLOR, CSS, FONT, uiPx } from '../theme';
 
 interface ResultData {
   won: boolean;
@@ -35,8 +35,8 @@ export class ResultScene extends Phaser.Scene {
       this,
       width / 2,
       height / 2,
-      Math.min(520, width * 0.92),
-      Math.min(500, height * 0.84),
+      Math.min(uiPx(520), width * 0.92),
+      Math.min(uiPx(500), height * 0.84),
     );
 
     const title = this.result.draw ? 'DRAW!' : this.result.won ? 'VICTORY!' : 'DEFEAT';
@@ -44,7 +44,7 @@ export class ResultScene extends Phaser.Scene {
     this.add
       .text(width / 2, height * 0.26, title, {
         fontFamily: FONT.display,
-        fontSize: `${Math.max(38, Math.min(72, width * 0.12))}px`,
+        fontSize: `${Math.max(uiPx(38), Math.min(uiPx(72), width * 0.12))}px`,
         color: titleColor,
         stroke: CSS.light,
         strokeThickness: 6,
@@ -54,26 +54,26 @@ export class ResultScene extends Phaser.Scene {
     this.add
       .text(width / 2, height * 0.43, `YOU  ${this.result.playerScore}`, {
         fontFamily: FONT.display,
-        fontSize: `${Math.max(24, Math.min(38, width * 0.07))}px`,
+        fontSize: `${Math.max(uiPx(24), Math.min(uiPx(38), width * 0.07))}px`,
         color: CSS.ink,
       })
       .setOrigin(0.5);
     this.add
       .text(width / 2, height * 0.52, `BOT  ${this.result.botScore}`, {
         fontFamily: FONT.display,
-        fontSize: `${Math.max(24, Math.min(38, width * 0.07))}px`,
+        fontSize: `${Math.max(uiPx(24), Math.min(uiPx(38), width * 0.07))}px`,
         color: CSS.soft,
       })
       .setOrigin(0.5);
     this.add
       .text(width / 2, height * 0.6, `DIFFICULTY: ${this.result.difficulty.toUpperCase()}`, {
         fontFamily: FONT.ui,
-        fontSize: `${Math.max(12, Math.min(16, width * 0.028))}px`,
+        fontSize: `${Math.max(uiPx(12), Math.min(uiPx(16), width * 0.028))}px`,
         color: CSS.soft,
       })
       .setOrigin(0.5);
 
-    const buttonWidth = Math.min(300, width * 0.75);
+    const buttonWidth = Math.min(uiPx(300), width * 0.75);
     makeButton(
       this,
       width / 2,

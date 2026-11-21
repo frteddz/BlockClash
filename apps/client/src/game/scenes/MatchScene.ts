@@ -21,9 +21,10 @@ import {
 import { audio } from '../audio/audio-manager';
 import { BLOCKS_TEXTURE, frameFor } from '../textures/atlas';
 import { blockKey } from '../textures/block-key';
-import { COLOR, CSS, FONT } from '../theme';
+import { COLOR, CSS, FONT, uiPx } from '../theme';
 import { makePanel } from '../ui/button';
 import { BoardView } from '../ui/board-view';
+import { inside, onCanvasPointer, type Point2, type Rect } from '../ui/input';
 
 interface DragState {
   pieceIndex: number;
@@ -50,6 +51,7 @@ export class MatchScene extends Phaser.Scene {
   private visualObjects: Phaser.GameObjects.GameObject[] = [];
   private trayObjects: Phaser.GameObjects.GameObject[] = [];
   private traySlotImages: Phaser.GameObjects.Image[][] = [[], [], []];
+  private trayRects: Rect[] = [];
   private scoreText!: Phaser.GameObjects.Text;
   private botScoreText!: Phaser.GameObjects.Text;
   private comboText!: Phaser.GameObjects.Text;
@@ -77,7 +79,7 @@ export class MatchScene extends Phaser.Scene {
     this.countdownText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, '', {
         fontFamily: FONT.display,
-        fontSize: `${Math.max(60, Math.min(130, this.scale.width * 0.2))}px`,
+        fontSize: `${Math.max(uiPx(60), Math.min(uiPx(130), this.scale.width * 0.2))}px`,
         color: CSS.accent,
         stroke: CSS.light,
         strokeThickness: 8,
@@ -86,12 +88,11 @@ export class MatchScene extends Phaser.Scene {
       .setDepth(200)
       .setVisible(false);
 
-    this.input.on('pointermove', this.onPointerMove, this);
-    this.input.on('pointerup', this.onPointerUp, this);
+    onCanvasPointer(this, 'down', (point) => this.onNativeDown(point));
+    onCanvasPointer(this, 'move', (point) => this.onPointerMove(point));
+    onCanvasPointer(this, 'up', () => this.onPointerUp());
     this.scale.on('resize', this.onResize, this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.input.off('pointermove', this.onPointerMove, this);
-      this.input.off('pointerup', this.onPointerUp, this);
       this.scale.off('resize', this.onResize, this);
       this.tweens.killAll();
     });
@@ -108,7 +109,7 @@ export class MatchScene extends Phaser.Scene {
     const portrait = height > width * 1.05;
 
     // Work out the tray first so the boards never grow into it.
-    const trayCell = Math.max(12, Math.min(width / 14, height * 0.04));
+    const trayCell = Math.max(uiPx(12), Math.min(width / 14, height * 0.04));
     const traySlotHeight = trayCell * 4.4;
     let opponentX: number;
     let opponentY: number;
@@ -119,7 +120,7 @@ export class MatchScene extends Phaser.Scene {
     let trayY: number;
 
     if (portrait) {
-      opponentCell = Math.max(14, Math.min((width - 56) / columns, (height * 0.2) / rows));
+      opponentCell = Math.max(uiPx(14), Math.min((width - 56) / columns, (height * 0.2) / rows));
       opponentX = (width - opponentCell * columns) / 2;
       opponentY = height * 0.17;
       playerY = opponentY + opponentCell * rows + 42;
@@ -130,7 +131,7 @@ export class MatchScene extends Phaser.Scene {
       playerX = (width - playerCell * columns) / 2;
       trayY = playerY + playerCell * rows + 16 + traySlotHeight / 2;
     } else {
-      const top = Math.max(64, height * 0.13);
+      const top = Math.max(uiPx(64), height * 0.13);
       playerCell = Math.max(
         18,
         Math.min((width / 2 - 68) / columns, (height - top - traySlotHeight - 70) / rows),
@@ -147,7 +148,7 @@ export class MatchScene extends Phaser.Scene {
     this.playerView = new BoardView(this, playerX, playerY, playerCell, columns, rows);
     this.opponentView = new BoardView(this, opponentX, opponentY, opponentCell, columns, rows);
 
-    const labelSize = Math.max(14, Math.min(24, width * 0.035));
+    const labelSize = Math.max(uiPx(14), Math.min(uiPx(24), width * 0.035));
     this.visualObjects.push(makePanel(this, width * 0.25, 32, width * 0.42, 52));
     this.visualObjects.push(makePanel(this, width * 0.75, 32, width * 0.42, 52));
     const botLabel = this.add
@@ -182,14 +183,14 @@ export class MatchScene extends Phaser.Scene {
     this.statusText = this.add
       .text(width / 2, 76, `VS ${this.difficulty.toUpperCase()} BOT`, {
         fontFamily: FONT.ui,
-        fontSize: `${Math.max(12, Math.min(18, width * 0.028))}px`,
+        fontSize: `${Math.max(uiPx(12), Math.min(uiPx(18), width * 0.028))}px`,
         color: CSS.soft,
       })
       .setOrigin(0.5);
     this.comboText = this.add
       .text(playerX + (playerCell * columns) / 2, playerY - 24, '', {
         fontFamily: FONT.display,
-        fontSize: `${Math.max(22, Math.min(40, playerCell * 0.85))}px`,
+        fontSize: `${Math.max(uiPx(22), Math.min(uiPx(40), playerCell * 0.85))}px`,
         color: CSS.accent,
         stroke: CSS.light,
         strokeThickness: 5,
@@ -210,9 +211,16 @@ export class MatchScene extends Phaser.Scene {
     const total = slotWidth * 3 + gap * 2;
     const firstX = (width - total) / 2 + slotWidth / 2;
     this.traySlotImages = [[], [], []];
+    this.trayRects = [];
 
     for (let index = 0; index < CONFIG.traySize; index += 1) {
       const centerX = firstX + index * (slotWidth + gap);
+      this.trayRects.push({
+        x: centerX - slotWidth / 2,
+        y: centerY - slotHeight / 2,
+        w: slotWidth,
+        h: slotHeight,
+      });
       const panel = makePanel(this, centerX, centerY, slotWidth, slotHeight, COLOR.panel);
       this.trayObjects.push(panel);
 
@@ -242,9 +250,6 @@ export class MatchScene extends Phaser.Scene {
         }
       }
 
-      const zone = this.add.zone(centerX, centerY, slotWidth, slotHeight).setInteractive();
-      zone.on('pointerdown', () => this.onTrayDown(index));
-      this.trayObjects.push(zone);
     }
   }
 
@@ -255,6 +260,7 @@ export class MatchScene extends Phaser.Scene {
     this.visualObjects = [];
     this.trayObjects = [];
     this.traySlotImages = [[], [], []];
+    this.trayRects = [];
   }
 
   private onResize(): void {
@@ -337,7 +343,13 @@ export class MatchScene extends Phaser.Scene {
     tick();
   }
 
-  private onTrayDown(index: number): void {
+  private onNativeDown(point: Point2): void {
+    if (this.drag !== null) return;
+    const index = this.trayRects.findIndex((rect) => inside(point, rect));
+    if (index >= 0) this.onTrayDown(index, point);
+  }
+
+  private onTrayDown(index: number, point: Point2): void {
     if (this.busy || this.match.phase !== 'playing') return;
     const piece = this.match.players[0].tray[index];
     if (piece === null || piece === undefined) return;
@@ -361,20 +373,20 @@ export class MatchScene extends Phaser.Scene {
     }
     this.drag = { pieceIndex: index, piece, sprites, target: null };
     this.setTraySlotAlpha(index, 0.3);
-    this.updateDrag(this.input.activePointer);
+    this.updateDrag(point);
   }
 
-  private onPointerMove(pointer: Phaser.Input.Pointer): void {
-    if (this.drag !== null) this.updateDrag(pointer);
+  private onPointerMove(point: Point2): void {
+    if (this.drag !== null) this.updateDrag(point);
   }
 
-  private updateDrag(pointer: Phaser.Input.Pointer): void {
+  private updateDrag(point: Point2): void {
     if (this.drag === null) return;
     const { piece, sprites } = this.drag;
     const cell = this.boardCellSize;
     const lift = cell * 1.15;
-    const centerX = pointer.x;
-    const centerY = pointer.y - lift;
+    const centerX = point.x;
+    const centerY = point.y - lift;
 
     sprites.forEach((sprite, i) => {
       const [dx, dy] = piece.shape.cells[i]!;

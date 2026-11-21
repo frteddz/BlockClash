@@ -5,5 +5,7 @@ dist/
 .env
 .env.*.local
 apps/client/public/assets/
+# Built APK is uploaded to the GitHub release, not committed.
+/*.apk
 .DS_Store
 coverage/

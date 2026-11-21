@@ -3,6 +3,8 @@
 A cartoony, chill, head-to-head block puzzle game. Every match is versus - there is no
 single-player mode. The web build runs at https://frteddz.github.io/BlockClash/.
 
+The v1 Android APK is on the [releases page](https://github.com/frteddz/BlockClash/releases/tag/v1.0.0).
+
 Read `AGENTS.md` for the full game design and `DECISIONS.md` for the choices made so far.
 
 ## Requirements

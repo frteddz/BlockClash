@@ -8,7 +8,7 @@ interface ResultData {
   draw: boolean;
   playerScore: number;
   botScore: number;
-  difficulty: Difficulty;
+  difficulty: Difficulty | 'lan';
 }
 
 export class ResultScene extends Phaser.Scene {
@@ -80,7 +80,8 @@ export class ResultScene extends Phaser.Scene {
       height * 0.69,
       'PLAY AGAIN',
       () => {
-        this.scene.start('Match', { difficulty: this.result.difficulty });
+        if (this.result.difficulty === 'lan') this.scene.start('LanLobby');
+        else this.scene.start('Match', { difficulty: this.result.difficulty });
       },
       { width: buttonWidth, height: 60, fontSize: 24, fill: COLOR.green },
     );

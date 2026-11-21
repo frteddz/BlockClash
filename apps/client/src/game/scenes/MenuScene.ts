@@ -58,11 +58,11 @@ export class MenuScene extends Phaser.Scene {
       enabled: false,
     });
     y += step;
-    makeButton(this, width / 2, y, 'OFFLINE DUEL', () => undefined, {
+    makeButton(this, width / 2, y, 'OFFLINE DUEL', () => this.scene.start('LanLobby'), {
       width: buttonWidth,
       height: buttonHeight,
       fontSize,
-      enabled: false,
+      fill: COLOR.gold,
     });
 
     const iconX = width - uiPx(42);

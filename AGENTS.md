@@ -191,7 +191,7 @@ assets/
 
 - **Q1.** Where to host the game server and web client, and what is the monthly budget? (A free tier is fine to start.)
 - **Q2.** Supabase or Firebase for accounts, profiles, friends?
-- **Q3.** What does "offline versus" mean: two players on the same device, or two devices on the same Wi-Fi with no internet? LAN across devices is a big extra feature, especially in a browser.
+- **Q3.** ANSWERED: two devices on the same Wi-Fi. LAN duel is in the Android app. A browser tab cannot open a LAN socket, so the web build shows an explanation instead.
 - **Q4.** Win condition and match length: pure survival, best of 3, or timed rounds?
 - **Q5.** Target stores and age rating (Google Play only? iOS needs a Mac)?
 - **Q6.** Monetization plans (ads, purchases, none)? It affects architecture later.

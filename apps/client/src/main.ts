@@ -6,6 +6,8 @@ import { DifficultyScene } from './game/scenes/DifficultyScene';
 import { SettingsScene } from './game/scenes/SettingsScene';
 import { MatchScene } from './game/scenes/MatchScene';
 import { ResultScene } from './game/scenes/ResultScene';
+import { LanLobbyScene } from './game/scenes/LanLobbyScene';
+import { LanMatchScene } from './game/scenes/LanMatchScene';
 
 // Phaser 3 has no built-in device pixel ratio support. We make the game buffer
 // DPR times larger and zoom the canvas back down to CSS pixels. That keeps text
@@ -30,7 +32,16 @@ const game = new Phaser.Game({
   input: {
     activePointers: 2,
   },
-  scene: [BootScene, MenuScene, DifficultyScene, SettingsScene, MatchScene, ResultScene],
+  scene: [
+    BootScene,
+    MenuScene,
+    DifficultyScene,
+    SettingsScene,
+    MatchScene,
+    LanLobbyScene,
+    LanMatchScene,
+    ResultScene,
+  ],
 });
 
 function resizeGame(): void {

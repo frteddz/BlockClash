@@ -17,3 +17,5 @@ One short entry per real decision. Keep this up to date with `AGENTS.md`.
 - **D013 (user):** Q2 answered with "no need for accounts for now". Phase 4 accounts, profiles, friends and rating are off the table. Online play, if built later, must work for guests.
 - **D014 (user):** The Android app icon is `assets/logo/icon_1024-mobile.png`. It is copied into the Capacitor Android mipmaps by a script. The original is never edited.
 - **D015 (user):** The first Android build is called BlockClash v1, version 1.0.0, application id `com.blockclash.game`.
+- **D016 (bug fix):** Buttons and tray pickups now use native pointer listeners on the canvas instead of Phaser game-object hit testing. Phaser's hit testing was unreliable for real mouse and touch input even though synthetic events worked in tests.
+- **D017 (bug fix):** The game buffer is rendered at up to 2x device pixel ratio and zoomed back to CSS size, so phones get sharp text and blocks. Menus are rebuilt on resize because they lay out only once in `create()`.

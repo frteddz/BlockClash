@@ -13,3 +13,7 @@ One short entry per real decision. Keep this up to date with `AGENTS.md`.
 - **D009 (Phase 0):** TypeScript `strict: true` is the enforced level. Extra pedantic flags are off to keep the code readable.
 - **D010 (Phase 2):** A `window.__blockclash` game reference is exposed only in dev builds for browser debugging. Production builds strip it via `import.meta.env.DEV`.
 - **D011 (Phase 2):** Verified in a real browser at 976x727 landscape and 390x844 portrait. The tray is sized before the boards in the layout math so it never covers the bottom row.
+- **D012 (user):** Q1 answered: host the web game on GitHub Pages under `frteddz.github.io/BlockClash`. A GitHub Actions workflow builds and deploys on every push to master.
+- **D013 (user):** Q2 answered with "no need for accounts for now". Phase 4 accounts, profiles, friends and rating are off the table. Online play, if built later, must work for guests.
+- **D014 (user):** The Android app icon is `assets/logo/icon_1024-mobile.png`. It is copied into the Capacitor Android mipmaps by a script. The original is never edited.
+- **D015 (user):** The first Android build is called BlockClash v1, version 1.0.0, application id `com.blockclash.game`.

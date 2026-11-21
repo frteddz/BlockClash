@@ -112,8 +112,10 @@ export class LanLobbyScene extends Phaser.Scene {
     this.listeners.push(await lan.onError((event) => this.setStatus(event.message)));
 
     try {
-      await lan.startHost(this.roomCode);
-      this.setStatus(`Your code: ${this.roomCode}\nWaiting for a player on the same WiFi...`);
+      const host = await lan.startHost(this.roomCode);
+      this.setStatus(
+        `Your code: ${this.roomCode}\nPort: ${host.port}\nWaiting for a player on the same WiFi...`,
+      );
     } catch (error) {
       this.setStatus(`Could not host: ${String(error)}`);
     }
